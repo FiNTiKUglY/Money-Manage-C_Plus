@@ -1,5 +1,4 @@
 all: main test
-	start test.exe
 
 main: main.c
 	gcc -pedantic -ansi -o main main.c
