@@ -16,3 +16,4 @@ jobs:
         cd lab1/
         make test
         ./test
+
