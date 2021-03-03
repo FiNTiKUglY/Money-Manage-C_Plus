@@ -12,5 +12,5 @@ int test_sumChecker() {
 int main() {
     test_sumChecker();
     printf("Test succesfully completed");
-    getch();
+    return 0;
 }
