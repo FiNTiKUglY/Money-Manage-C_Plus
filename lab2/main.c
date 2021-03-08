@@ -4,38 +4,38 @@
 #include <string.h>
 
 void receipt() {
-	printf("________________\n");
-	printf("|              |\n");
-	printf("|              |\n");
-	printf("|              |\n");
-	printf("|              |\n");
-	printf("|              |\n");
-	printf("|              |\n");
-	printf("|              |\n");
-	printf("________________\n");
+    printf("________________\n");
+    printf("|              |\n");
+    printf("|              |\n");
+    printf("|              |\n");
+    printf("|              |\n");
+    printf("|              |\n");
+    printf("|              |\n");
+    printf("|              |\n");
+    printf("________________\n");
 }
 
 int procent(int money, char* date) {
-	int days[12] = {31, 30, 31, 30, 31, 31, 30, 31, 30 , 31, 31 , 28};
-	int day, month, year, i, dateInt, newmoney;
-	newmoney = money;
-	day = 0;
-	month = 0;
-	year = 0;
-	for (i = 0; i < 2; i += 1) {
-		day = day + (date[i] - 48) * pow(10, (1 - i));
-	}
-	for (i = 3; i < 5; i += 1) {
-		month += (date[i] - '0') * pow(10, (4 - i));
-	}
-	for (i = 6; i < 10; i += 1) {
-		year += (date[i] - '0') * pow(10, (9 - i));
-	}
-	dateInt = (year - 2021) * 12 + (month - 3);
-	for (i = 0; i < dateInt; i++) {
-		newmoney = newmoney * (1 + (0.1275 / 365 * days[i]));
-	}
-	return newmoney;
+    int days[12] = {31, 30, 31, 30, 31, 31, 30, 31, 30 , 31, 31 , 28};
+    int day, month, year, i, dateInt, newmoney;
+    newmoney = money;
+    day = 0;
+    month = 0;
+    year = 0;
+    for (i = 0; i < 2; i += 1) {
+	    day = day + (date[i] - 48) * pow(10, (1 - i));
+    }
+    for (i = 3; i < 5; i += 1) {
+	    month += (date[i] - '0') * pow(10, (4 - i));
+    }
+    for (i = 6; i < 10; i += 1) {
+	    year += (date[i] - '0') * pow(10, (9 - i));
+    }
+    dateInt = (year - 2021) * 12 + (month - 3);
+    for (i = 0; i < dateInt; i++) {
+	    newmoney = newmoney * (1 + (0.1275 / 365 * days[i]));
+    }
+    return newmoney;
 }
 
 int OpenAccount() {
@@ -133,5 +133,5 @@ int main() {
 		}
 
 	}
-	
+
 }
