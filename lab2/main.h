@@ -1,4 +1,3 @@
-void receipt();
 int procent(int money, char* date);
 int dateChecker(char* date);
 int OpenAccount();
