@@ -3,6 +3,8 @@
 #include <math.h>
 #include <string.h>
 
+#include "main.h"
+
 void receipt() {
     printf("________________\n");
     printf("|              |\n");
@@ -23,7 +25,7 @@ int procent(int money, char* date) {
     month = 0;
     year = 0;
     for (i = 0; i < 2; i += 1) {
-        day = day + (date[i] - 48) * pow(10, (1 - i));
+        day += (date[i] - '0') * pow(10, (1 - i));
     }
     for (i = 3; i < 5; i += 1) {
         month += (date[i] - '0') * pow(10, (4 - i));
@@ -74,6 +76,8 @@ void LookBankInfo() {
     printf("Phone number is 80(17)44-55-66\n");
 }
 
+#ifndef TESTING
+
 int main() {
     int money, number, addedMoney, i;
     char date[15];
@@ -121,7 +125,7 @@ int main() {
                     break;
                 case 3:
                     printf("\nEnter date (xx.xx.xxxx format):\n");
-                    scanf("%s", &date);
+                    scanf("%s", date);
                     LookDayInfo(money, date);
                     break;
                 case 4:
@@ -136,3 +140,5 @@ int main() {
         }
     }
 }
+
+#endif
