@@ -5,18 +5,6 @@
 
 #include "main.h"
 
-void receipt() {
-    printf("________________\n");
-    printf("|              |\n");
-    printf("|              |\n");
-    printf("|              |\n");
-    printf("|              |\n");
-    printf("|              |\n");
-    printf("|              |\n");
-    printf("|              |\n");
-    printf("________________\n");
-}
-
 int procent(int money, char* date) {
     int days[12] = {31, 30, 31, 30, 31, 31, 30, 31, 30 , 31, 31 , 28};
     int day, month, year, i, dateInt, newmoney;
@@ -37,14 +25,30 @@ int procent(int money, char* date) {
     if (dateInt > 12) dateInt = 12;
     for (i = 0; i < dateInt; i++) {
         newmoney = newmoney * (1 + (0.1275 / 365 * days[i]));
-    }  
+    }
     return newmoney;
+}
+
+int dateChecker(char* date) {
+    int check = 1;
+    int i;
+    for (i = 0; i < 2; i += 1) {
+        if (!(date[i] > 47 && date[i] < 58)) check = 0;
+    }
+    for (i = 3; i < 5; i += 1) {
+        if (!(date[i] > 47 && date[i] < 58)) check = 0;
+    }
+    for (i = 6; i < 10; i += 1) {
+        if (!(date[i] > 47 && date[i] < 58)) check = 0;
+    }
+    if (!(date[2] == '.' && date[5] == '.')) check = 0;
+    return check;
 }
 
 int OpenAccount() {
     int money;
-    printf("\nEnter the amount of money: ");
-    while (!(scanf("%d", &money) == 1)) {
+    printf("\nEnter the amount of money (10000000 max): ");
+    while (!(scanf("%d", &money) == 1) || money > 10000000) {
         printf("Try again: ");
         while (getchar() != '\n') {}
     }
@@ -67,7 +71,15 @@ void LookDayInfo(int money, char* date) {
 }
 
 void CloseAccount(int money) {
-    receipt();
+    printf("___________________\n");
+    printf("|   TransitBank   |\n");
+    printf("| Closing account |\n");
+    printf("|Date: 01.03.2021 |\n");
+    printf("|Identficator:    |\n");
+    printf("|780123451512     |\n");
+    printf("|Amount of money: |\n");
+    printf("|%17d|\n", money);
+    printf("___________________\n");
 }
 
 void LookBankInfo() {
@@ -80,7 +92,7 @@ void LookBankInfo() {
 
 int main() {
     int money, number, addedMoney, i;
-    char date[15];
+    char date[10];
     printf("Welcome to TransitBank system, please enter the number:\n");
 
     while(1) {
@@ -113,8 +125,8 @@ int main() {
 
             switch (number) {
                 case 1:
-                    printf("\nEnter an additional amount of money: ");
-                    while (!(scanf("%d", &addedMoney) == 1)) {
+                    printf("\nEnter an additional amount of money (10000000 max): ");
+                    while (!(scanf("%d", &addedMoney) == 1) || addedMoney > 10000000) {
                         printf("Try again: ");
                         while (getchar() != '\n') {}
                     }
@@ -124,8 +136,11 @@ int main() {
                     LookInfo(money);
                     break;
                 case 3:
-                    printf("\nEnter date (xx.xx.xxxx format):\n");
-                    scanf("%s", date);
+                    while(1) {
+                        printf("\nEnter date (xx.xx.xxxx format):\n");
+                        scanf("%s", date);
+                        if (dateChecker(date)) break;
+                    }
                     LookDayInfo(money, date);
                     break;
                 case 4:
