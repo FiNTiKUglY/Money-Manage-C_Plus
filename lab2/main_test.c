@@ -5,10 +5,12 @@
 
 int test_procent() {
     assert(procent(1000, "02.03.2022") == 1128);
+    assert(procent(1000, "29.05.2021") == 1020);
 }
 
 int test_AddMoney() {
     assert(AddMoney(1000, 100) == 1100);
+    assert(AddMoney(500, 200) == 700);
 }
 
 int test_dateChecker() {
