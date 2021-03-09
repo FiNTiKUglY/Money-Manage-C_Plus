@@ -1,3 +1,7 @@
+#ifndef MAINH
+#define MAINH
+
+void receipt();
 int procent(int money, char* date);
 int dateChecker(char* date);
 int OpenAccount();
@@ -6,3 +10,5 @@ void LookInfo(int money);
 void LookDayInfo(int money, char* date);
 void CloseAccount(int money);
 void LookBankInfo();
+
+#endif
