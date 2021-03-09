@@ -5,6 +5,7 @@
 
 int test_fact() {
     assert(fact(5) == 120);
+    assert(fact(7) == 5040);
 }
 
 int test_foundN() {
