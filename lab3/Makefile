@@ -17,6 +17,6 @@ cleanL:
 git:
 	cd ../
 	git add lab3
-	git commit -m "commit"
+	git commit -m "updating"
 	git pull
 	git push -u origin
