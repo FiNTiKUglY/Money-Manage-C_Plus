@@ -34,12 +34,12 @@ int main() {
     char string[25];
     int number;
     printf("Enter the number: ");
-    scanf("%s", &string);
+    scanf("%s", string);
     while (!strCheck(string)) {
         printf("String has not only digits or has more than 10 digits\n");
         printf("Try again: ");
         while (getchar() != '\n') {}
-        scanf("%s", &string);
+        scanf("%s", string);
     }
 
     number = StoI(0, string);
