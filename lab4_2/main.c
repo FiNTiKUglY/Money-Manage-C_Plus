@@ -5,11 +5,6 @@
 
 #include "main.h"
 
-int fileExist(FILE* file) {
-    if (file == NULL) return 0;
-    else return 1;
-}
-
 int dateChecker(char* date) {
     int day, month, year, i, dateInt;
     day = 0;
@@ -49,7 +44,7 @@ int main() {
     char costS[50];
     int count, cost, n, lostMoney = 0;
     FILE* file = fopen("input.txt", "r");
-    if(fileExist(file) == 0) {
+    if(file == NULL) {
         printf("Can`t find current file");
         return 0;
     }
@@ -88,7 +83,7 @@ int main() {
         if (dateChecker(date)) {
             printf("%s", string);
             lostMoney += count * cost;
-        } 
+        }
     }
     fclose(file);
     printf("Lost money: %d", lostMoney);

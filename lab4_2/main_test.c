@@ -4,12 +4,8 @@
 #include "main.h"
 
 int test_fileExist() {
-    FILE* file1 = fopen("input.txt", "r");
-    FILE* file2 = fopen("doesn`tExist.txt", "r");
-    assert(fileExist(file1) == 1);
-    assert(fileExist(file2) == 0);
-    fclose(file1);
-    fclose(file2);
+    assert(fopen("input.txt", "r") != NULL);
+    assert(fopen("doesn`tExist.txt", "r") == NULL);
 }
 
 int test_dateChecker() {
@@ -26,6 +22,7 @@ int test_number() {
 #undef main
 
 int main() {
+    test_fileExist();
     test_dateChecker();
     test_number();
     printf("Test succesfully completed");
