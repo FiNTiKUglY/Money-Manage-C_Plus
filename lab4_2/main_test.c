@@ -26,6 +26,7 @@ int test_number() {
 #undef main
 
 int main() {
+    test_fileExist();
     test_dateChecker();
     test_number();
     printf("Test succesfully completed");
