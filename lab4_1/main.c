@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
 
 #include "main.h"
 
 int n = 0;
+
+int strlen(char* str) {
+    int i = 0;
+    while (str[i] != '\0') i += 1;
+    return i;
+}
 
 int strCheck(char* str) {
     int check = 1;

@@ -5,6 +5,11 @@
 
 extern int n;
 
+int test_strlen() {
+    assert(strlen("1234") == 4);
+    assert(strlen("65123") == 5);
+}
+
 int test_strCheck() {
     assert(strCheck("e23ae") == 0);
     assert(strCheck("12345678901") == 0);
@@ -21,6 +26,7 @@ int test_StoI() {
 #undef main
 
 int main() {
+    test_strlen();
     test_strCheck();
     test_StoI();
     printf("Test succesfully completed");
