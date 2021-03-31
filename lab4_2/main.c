@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
 
 #include "main.h"
+
+int strlen(char* str) {
+    int i = 0;
+    while (str[i] != '\0') i += 1;
+    return i;
+}
 
 int dateChecker(char* date) {
     int day, month, year, i, dateInt;
@@ -86,7 +91,7 @@ int main() {
         }
     }
     fclose(file);
-    printf("Lost money: %d", lostMoney);
+    printf("\nLost money: %d", lostMoney);
 }
 
 #endif

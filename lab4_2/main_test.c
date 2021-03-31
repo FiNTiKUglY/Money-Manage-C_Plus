@@ -3,6 +3,11 @@
 
 #include "main.h"
 
+int test_strlen() {
+    assert(strlen("1234123") == 7);
+    assert(strlen("65123") == 5);
+}
+
 int test_fileExist() {
     assert(fopen("input.txt", "r") != NULL);
     assert(fopen("doesn`tExist.txt", "r") == NULL);
@@ -22,6 +27,7 @@ int test_number() {
 #undef main
 
 int main() {
+    test_strlen();
     test_fileExist();
     test_dateChecker();
     test_number();
