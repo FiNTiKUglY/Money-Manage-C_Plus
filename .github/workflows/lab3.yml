@@ -1,0 +1,17 @@
+name: lab3
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: make
+      run: |
+        cd lab3/
+        make test
+        ./test
