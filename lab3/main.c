@@ -53,6 +53,11 @@ int main(int argc, char** argv)
     int i;
     int r1, r2, n;
     int* board = (int*)malloc(sizeof(int) * 8);
+    if (board == NULL) {
+        printf("Not enough memory");
+        free(board);
+        exit(1);
+    }
     for (i = 0; i < 8; i += 1) {
         board[i] = 0;
     }
