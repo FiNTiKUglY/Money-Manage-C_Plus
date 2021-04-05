@@ -1,9 +1,8 @@
 #ifndef MAINH
 #define MAINH
 
-int min(int first, int second);
-void show(int board[][8]);
-int posChecker(int board[][8], int x, int y);
-int put(int board[][8], int count);
+void show(int* board);
+int posChecker(int* board, int pos);
+void put(int* board, int constPos);
 
 #endif

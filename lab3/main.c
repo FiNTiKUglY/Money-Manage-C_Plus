@@ -1,68 +1,61 @@
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 #include <stdlib.h>
- 
-#include "main.h"
 
-int min(int first, int second) {
-    if (first < second)
-        return first;
-    return second;
-}
- 
-void show(int board[][8]) {
+void show(int* board) {
     int i, j;
     for (i = 0; i < 8; i += 1) {
-        for (j = 0; j < 8; j += 1) {
-            if (board[i][j] == 0) printf(". ");
-            else printf("Q ");
+        for (j = 0; j < board[i]; j += 1) {
+            printf(". ");
+        }
+        printf("Q ");
+        for (j = board[i] + 1; j < 8; j += 1) {
+            printf(". ");
         }
         printf("\n");
     }
 }
- 
-int posChecker(int board[][8], int x, int y) {
-    int i, j, m;
-    for (i = 0; i < 8; i += 1) {
-        if (board[i][y] || board[x][i])
-            return 0;
-    }
-    m = min(x, y);
-    for (i = x - m, j = y - m; i < 8 && j < 8; i += 1, j += 1) {
-        if (board[i][j])
-            return 0;
-    }
-    m = min(x, 7 - y);
-    for (i = x - m, j = y + m; i < 8 && j < 8; i += 1, j -= 1) {
-        if (board[i][j])
-            return 0;
+
+int posChecker(int* board, int pos) {
+    int i;
+    for (i = 0; i < pos; i += 1) {
+        if (board[i] == (board[pos] - (pos - i))) return 0;
+        else if (board[i] == ((pos - i) + board[pos])) return 0;
+        else if (board[i] == board[pos]) return 0;
     }
     return 1;
 }
- 
-int put(int board[][8], int count) {
-    int i, j;
-    if (count == 8)
-        return 1;
-    for (i = 0; i < 8; i += 1) {
-        for (j = 0; j < 8; j += 1) {
-            if (posChecker(board, i, j)) {
-                board[i][j] = count + 1;
-                if (put(board, count + 1))
-                    return 1;
-                board[i][j] = 0;
-            }
+
+void put(int* board, int constPos) {
+    int i = 0;
+    while (1) {
+        if (i == 8) return;               
+        if (board[i] == 8) {
+            board[i] = 0;
+            i -= 1;
+            if (i == constPos) i -= 1;
+            board[i] += 1; 
+            continue;
+        }
+        if (posChecker(board, i)) i += 1;
+        else {
+            if (i == constPos) i -= 1; 
+            board[i] += 1;
         }
     }
-    return 0;
 }
 
 #ifndef TESTING
 
 int main(int argc, char** argv)
 {
-    int board[8][8] = {0};
+    int i;
     int r1, r2, n;
+    int* board = (int*)malloc(sizeof(int) * 8);
+    for (i = 0; i < 8; i += 1) {
+        board[i] = 0;
+    }
     printf("If you want to put the first queen by yourself type '1'\nif you want to get random position type '2'\n");
     scanf("%d", &n);
     switch(n) {
@@ -80,13 +73,13 @@ int main(int argc, char** argv)
             r2 = rand() % 8;
             break;
         default:
-            exit(0);    
+            exit(0);
     }
-    board[r1][r2] = 1;
+    board[r1] = r2;
+    printf("Your cords: %d row and %d column\n", r1 + 1, r2 + 1);
+    put(board, r1);
     show(board);
-    printf("\n\n");
-    put(board, 1);
-    show(board);
+    free(board);
     return 0;
 }
 
