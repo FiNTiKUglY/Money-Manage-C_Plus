@@ -205,12 +205,10 @@ int LongModShort(MNumber n1, int n2) {
     return temp;
 }
 
-void freeNumb(MNumber number)
-{
+void freeNumb(MNumber number) {
     Item *n;
     Item *p = number.tail;
-    while(p)
-    {
+    while(p) {
         n = p->prev;
         free(p);
         p = n;
