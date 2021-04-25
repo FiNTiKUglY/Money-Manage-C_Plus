@@ -48,6 +48,7 @@ void AddDigit(MNumber *number, int digit) {
         number->tail = p;
     }
     number->n++;
+    free(p);
 }
 
 void ReverseAddDigit(MNumber *number, int digit) {
@@ -67,6 +68,7 @@ void ReverseAddDigit(MNumber *number, int digit) {
         number->head = p;
     }
     number->n++;
+    free(p);
 }
 
 void PrintMNumber(MNumber number) {
