@@ -57,6 +57,14 @@ void descendingOrder(Node *node) {
     if (node->left) descendingOrder(node->left);
 }
 
+void freeTree(Node *node) {
+    if(node != NULL) {
+        if(node->left != NULL) freeTree(node->left);
+        if(node->right != NULL) freeTree(node->right);
+        free(node);
+    }
+}
+
 #ifndef TESTING
 
 int main() {
@@ -105,6 +113,11 @@ int main() {
     printf("\n\nDescending tree output:\n");
     descendingOrder(rootMax);
     fclose(file);
+    for (i = 0; i < n; i += 1) {
+        for (j = 0; j < n; j += 1) {
+            freeTree(root[i][j]);
+        }
+    }
 }
 
 #endif

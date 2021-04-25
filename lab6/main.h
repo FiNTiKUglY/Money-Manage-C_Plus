@@ -12,5 +12,6 @@ void ascendingOrder(Node *node);
 void descendingOrder(Node *node);
 int nodesSum(Node *node);
 Node* findMax(Node ***trees, int size_n, int size_m);
+void freeTree(Node *node);
 
 #endif

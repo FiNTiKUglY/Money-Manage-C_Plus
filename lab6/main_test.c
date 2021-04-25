@@ -10,7 +10,7 @@ int amountOfNodes(Node *node) {
 }
 
 int test_all() {
-    int i;
+    int i, j;
     Node*** rootsArr;
     Node* root = NULL;
     assert(amountOfNodes(root) == 0);
@@ -35,6 +35,11 @@ int test_all() {
     addNode(8, &rootsArr[0][1]);
     addNode(23, &rootsArr[0][1]);
     assert(findMax(rootsArr, 1, 2) == rootsArr[0][1]);
+    for (i = 0; i < 1; i += 1) {
+        for (j = 0; j < 2; j += 1) {
+            freeTree(rootsArr[i][j]);
+        }
+    }
 }
 
 #undef main
