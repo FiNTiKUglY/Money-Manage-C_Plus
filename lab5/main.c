@@ -274,7 +274,6 @@ int main() {
                 a = CreateMNumber(num1);
                 printf("%d", LongModShort(a, number));
                 freeNumb(a);
-                freeNumb(c);
                 break;
             default:
                 return 0;
