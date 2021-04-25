@@ -15,19 +15,28 @@ MNumber CreateMNumber(char* initStr) {
 
 char* MNumberToString(MNumber number) {
     int i = 0;
-    char string[50];
+    char* digit;
     Item* p = number.tail;
+    char* string = (char*)malloc(sizeof(char) * 40);
+    if (string == NULL) {
+        printf("No memory");
+        exit(1);
+    }
     while (p) {
-        string[i + 1] = '\0';
         string[i] = p->digit + '0';
         p = p->prev;
         i += 1;
     }
+    string[i] = '\0';
     return string;
 }
 
 void AddDigit(MNumber *number, int digit) {
     Item *p = (Item *)malloc(sizeof(Item));
+    if (p == NULL) {
+        printf("No memory");
+        exit(1);
+    }
     p->digit = digit;
     p->next = p->prev = NULL;
     if (number->head == NULL) {
@@ -43,6 +52,10 @@ void AddDigit(MNumber *number, int digit) {
 
 void ReverseAddDigit(MNumber *number, int digit) {
     Item *p = (Item *)malloc(sizeof(Item));
+    if (p == NULL) {
+        printf("No memory");
+        exit(1);
+    }
     p->digit = digit;
     p->next = p->prev = NULL;
     if (number->head == NULL) {
@@ -192,8 +205,23 @@ int LongModShort(MNumber n1, int n2) {
     return temp;
 }
 
+void freeNumb(MNumber number)
+{
+    Item *n;
+    Item *p = number.tail;
+    while(p)
+    {
+        n = p->prev;
+        free(p);
+        p = n;
+    }
+}
+
+#ifndef TESTING
+
 int main() {
     MNumber a, b, c;
+    char* string;
     char num1[30], num2[30];
     int choose, number;
     while (1) {
@@ -215,6 +243,8 @@ int main() {
                 if (Equal(a, b) == 0) printf("Numbers are equal\n");
                 else if (Equal(a, b) == 1) printf("First number is greater than second\n");
                 else if (Equal(a, b) == -1) printf("Second number is greater than first\n");
+                freeNumb(a);
+                freeNumb(b);
                 break;
             case 2:
                 printf("Enter the first number (long): ");
@@ -224,6 +254,8 @@ int main() {
                 a = CreateMNumber(num1);
                 c = LongMulShort(a, number);
                 PrintMNumber(c);
+                freeNumb(a);
+                freeNumb(c);
                 break;
             case 3:
                 printf("Enter the first number (long): ");
@@ -233,6 +265,8 @@ int main() {
                 a = CreateMNumber(num1);
                 c = LongDivShort(a, number);
                 PrintMNumber(c);
+                freeNumb(a);
+                freeNumb(c);
                 break;
             case 4:
                 printf("Enter the first number (long): ");
@@ -241,9 +275,13 @@ int main() {
                 scanf("%d", &number);
                 a = CreateMNumber(num1);
                 printf("%d", LongModShort(a, number));
+                freeNumb(a);
+                freeNumb(c);
                 break;
             default:
                 return 0;
         }
     }
 }
+
+#endif

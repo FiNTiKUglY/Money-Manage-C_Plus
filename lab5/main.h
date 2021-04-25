@@ -24,5 +24,6 @@ int Equal(MNumber n1, MNumber n2);
 MNumber LongMulShort(MNumber n1, int n2);
 MNumber LongDivShort(MNumber n1, int n2);
 int LongModShort(MNumber n1, int n2);
+void freeNumb(MNumber number);
 
 #endif
