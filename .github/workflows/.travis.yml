@@ -1,0 +1,10 @@
+language: c
+sudo: false # only for faster builds
+script:
+  - cd lab6
+  - gcc -coverage -pedantic -ansi -o test -D TESTING main.c main_test.c -lm
+  - ./test
+  - gcov main_test.c
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t 367fa5b9-76d9-4592-977c-b24b58aa5903
