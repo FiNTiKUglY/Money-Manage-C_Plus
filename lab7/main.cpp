@@ -104,17 +104,41 @@ int getAllMoney(vector<Human> list) {
 void moneyTransfer(Human* sender, Human* receiver, int money) {
     (*sender).money -= money;
     (*receiver).money += money;
-    //квитанция
+    printf("___________________\n");
+    printf("|    PriorBank    |\n");
+    printf("| Transfer money  |\n");
+    printf("|Date: %s |\n", currentDate);
+    printf("|Identficator:    |\n");
+    printf("|%17d|\n", (*sender).account);
+    printf("|Amount of money: |\n");
+    printf("|%17d|\n", money);
+    printf("___________________\n");
 }
 
 void moneyWithdraw(Human* acc, int money) {
     (*acc).money -= money;
-    //квитанция
+    printf("___________________\n");
+    printf("|    PriorBank    |\n");
+    printf("| Withdraw money  |\n");
+    printf("|Date: %s |\n", currentDate);
+    printf("|Identficator:    |\n");
+    printf("|%17d|\n", (*acc).account);
+    printf("|Amount of money: |\n");
+    printf("|%17d|\n", money);
+    printf("___________________\n");
 }
 
 void moneyTopUp(Human* acc, int money) {
     (*acc).money += money;
-    //квитанция
+    printf("___________________\n");
+    printf("|    PriorBank    |\n");
+    printf("|  Money top up   |\n");
+    printf("|Date: %s |\n", currentDate);
+    printf("|Identficator:    |\n");
+    printf("|%17d|\n", (*acc).account);
+    printf("|Amount of money: |\n");
+    printf("|%17d|\n", money);
+    printf("___________________\n");
 }
 
 int procent(Human acc, string date) {
