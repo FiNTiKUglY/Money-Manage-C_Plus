@@ -1,9 +1,9 @@
 all: main test
 
-main: main.c
+main: main.cpp
 	g++ -o main main.c -lm
 
-test: main.c main_test.c
+test: main.cpp main_test.cpp
 	g++ -coverage -o test -D TESTING main.cpp main_test.cpp -lm
 
 cleanW: 
