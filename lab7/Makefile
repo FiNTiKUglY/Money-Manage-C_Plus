@@ -18,4 +18,4 @@ git:
 	cd ../
 	git add lab7
 	git commit -m "updating"
-	git push -u origin
+	git push
