@@ -1,7 +1,7 @@
 all: main test
 
 main: main.cpp
-	g++ -o main main.c -lm
+	g++ -o main main.cpp -lm
 
 test: main.cpp main_test.cpp
 	g++ -coverage -o test -D TESTING main.cpp main_test.cpp -lm

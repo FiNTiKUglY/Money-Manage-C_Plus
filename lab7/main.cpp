@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <fstream>
+#include <string>
 #include <time.h>
 #include <vector>
 
@@ -22,18 +23,24 @@ int inputCheck(int min, int max) {
 void initialization(vector<Human> *list, string fileName) {
     ifstream fin(fileName);
     Human chel;
-	while (!fin.eof()) {
-		fin >> chel.account;
-		fin >> chel.category;
-		fin >> chel.name;
-		fin >> chel.lastName;
+    while (!fin.eof()) {
+	    fin >> chel.account;
+	    fin >> chel.category;
+	    fin >> chel.name;
+	    fin >> chel.lastName;
         fin >> chel.birthDate;
         fin >> chel.city;
         fin >> chel.number;
         fin >> chel.money;
         (*list).push_back(chel);
-	}
+    }
     fin.close();
+}
+
+void discharge(Human acc, string text, string fileName) {
+    ofstream fout;
+    fout.open(fileName, ios::out | ios::app);
+    fout << acc.account << endl << text << endl;
 }
 
 void synchronization(vector<Human> list, string fileName) {
@@ -42,18 +49,18 @@ void synchronization(vector<Human> list, string fileName) {
     fout.open(fileName, ios::out | ios::trunc);
     for (i = 0; i < list.size() - 1; i++) {
         fout << list[i].account << " ";
-		fout << list[i].category << " ";
-		fout << list[i].name << " ";
-		fout << list[i].lastName << " ";
+	    fout << list[i].category << " ";
+	    fout << list[i].name << " ";
+	    fout << list[i].lastName << " ";
         fout << list[i].birthDate << " ";
         fout << list[i].city << " ";
         fout << list[i].number << " ";
         fout << list[i].money << "\n";
     }
     fout << list[i].account << " ";
-	fout << list[i].category << " ";
-	fout << list[i].name << " ";
-	fout << list[i].lastName << " ";
+    fout << list[i].category << " ";
+    fout << list[i].name << " ";
+    fout << list[i].lastName << " ";
     fout << list[i].birthDate << " ";
     fout << list[i].city << " ";
     fout << list[i].number << " ";
@@ -70,13 +77,13 @@ void lookList(vector<Human> list) {
 }
 
 void lookInfo(Human chel) {
-	cout << "Number of account: " << chel.account << endl;
-	cout << "Category of account: ";
-	if (chel.category == (int)VysheNet) cout << "Vyshe.net" << endl;
-	else if (chel.category == (int)VysheNetIrrevocable) cout << "Vyshe.net (irrevocalbe)" << endl;
-	else if (chel.category == (int)Stars5) cout << "5 stars" << endl;
-	else if (chel.category == (int)Stars5Irrevocable) cout << "5 stars (irrevocalbe)" << endl;
-	cout << "Name: " << chel.name << " " << chel.lastName << endl;
+    cout << "Number of account: " << chel.account << endl;
+    cout << "Category of account: ";
+    if (chel.category == (int)VysheNet) cout << "Vyshe.net" << endl;
+    else if (chel.category == (int)VysheNetIrrevocable) cout << "Vyshe.net (irrevocalbe)" << endl;
+    else if (chel.category == (int)Stars5) cout << "5 stars" << endl;
+    else if (chel.category == (int)Stars5Irrevocable) cout << "5 stars (irrevocalbe)" << endl;
+    cout << "Name: " << chel.name << " " << chel.lastName << endl;
     cout << "Date of birth: " << chel.birthDate << endl;
     cout << "City of birth: " << chel.city << endl;
     cout << "Passport`s number: " << chel.number << endl;
@@ -85,12 +92,12 @@ void lookInfo(Human chel) {
 
 void sortList(vector<Human> *list) {
     for (int i = 1; i < (*list).size(); i++) {
-		for (int j = 0; j < (*list).size() - i; j++) {
-			if ((*list)[j].money < (*list)[j + 1].money) {
-				swap((*list)[j], (*list)[j + 1]);
-			}
-		}
-	}
+        for (int j = 0; j < (*list).size() - i; j++) {
+            if ((*list)[j].money < (*list)[j + 1].money) {
+                swap((*list)[j], (*list)[j + 1]);
+            }
+        }
+    }
 }
 
 int getAllMoney(vector<Human> list) {
@@ -101,9 +108,12 @@ int getAllMoney(vector<Human> list) {
     return all;
 }
 
-void moneyTransfer(Human* sender, Human* receiver, int money) {
+void moneyTransfer(Human* sender, Human* receiver, int money, string fileName) {
     (*sender).money -= money;
     (*receiver).money += money;
+    string text(currentDate);
+    text += " money transfer to " + to_string((*receiver).account) + " by " + to_string(money);
+    discharge((*sender), text, fileName);
     printf("___________________\n");
     printf("|    PriorBank    |\n");
     printf("| Transfer money  |\n");
@@ -115,8 +125,11 @@ void moneyTransfer(Human* sender, Human* receiver, int money) {
     printf("___________________\n");
 }
 
-void moneyWithdraw(Human* acc, int money) {
+void moneyWithdraw(Human* acc, int money, string fileName) {
     (*acc).money -= money;
+    string text(currentDate);
+    text += " money withdraw by " + to_string(money);
+    discharge((*acc), text, fileName);
     printf("___________________\n");
     printf("|    PriorBank    |\n");
     printf("| Withdraw money  |\n");
@@ -128,8 +141,11 @@ void moneyWithdraw(Human* acc, int money) {
     printf("___________________\n");
 }
 
-void moneyTopUp(Human* acc, int money) {
+void moneyTopUp(Human* acc, int money, string fileName) {
     (*acc).money += money;
+    string text(currentDate);
+    text += " money top up by " + to_string(money);
+    discharge((*acc), text, fileName);
     printf("___________________\n");
     printf("|    PriorBank    |\n");
     printf("|  Money top up   |\n");
@@ -169,7 +185,7 @@ int procent(Human acc, string date) {
         newmoney = newmoney * (1 + (procent / 365 * days[n]));
     }
     return newmoney;
-}
+}7
 
 void lookInfoInDate(Human acc, string date) {
     int dayMoney;
@@ -179,26 +195,26 @@ void lookInfoInDate(Human acc, string date) {
 
 bool dateFormat(string date)
 {
-	int check = true;
-	static int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	int i, day = 0, mon = 0, year = 0;
-	if (date.length() != 10) return false;
-	for (i = 0; i < 2; i += 1) {
-		if (!(date[i] > 47 && date[i] < 58)) check = false;
-		day += (date[i] - 48) * pow(10, 1 - i);
-	}
-	for (i = 3; i < 5; i += 1) {
-		if (!(date[i] > 47 && date[i] < 58)) check = false;
-		mon += (date[i] - 48) * pow(10, 4 - i);
-	}
+    int check = true;
+    static int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int i, day = 0, mon = 0, year = 0;
+    if (date.length() != 10) return false;
+    for (i = 0; i < 2; i += 1) {
+        if (!(date[i] > 47 && date[i] < 58)) check = false;
+        day += (date[i] - 48) * pow(10, 1 - i);
+    }
+    for (i = 3; i < 5; i += 1) {
+        if (!(date[i] > 47 && date[i] < 58)) check = false;
+        mon += (date[i] - 48) * pow(10, 4 - i);
+    }
     for (i = 6; i < 10; i += 1) {
         if (!(date[i] > 47 && date[i] < 58)) check = false;
         year += (date[i] - 48) * pow(10, 9 - i);
     }
-	if (date[2] != '.' || date[5] != '.') check = false;
-	if (day > days[mon - 1] || mon > 12) check = false;
+    if (date[2] != '.' || date[5] != '.') check = false;
+    if (day > days[mon - 1] || mon > 12) check = false;
     if (year < 2021) check = false;
-	return check;
+    return check;
 }
 
 #ifndef TESTING
@@ -251,7 +267,7 @@ int main() {
                         case 2:
                             cout << "Enter amount of money to top up" << endl;
                             cin >> money;
-                            moneyTopUp(&chel[index - 1], money);
+                            moneyTopUp(&chel[index - 1], money, "discharge.txt");
                             system("pause");
                             cin.get();
                             system("cls");
@@ -259,7 +275,7 @@ int main() {
                         case 3:
                             cout << "Enter amount of money to withdraw" << endl;
                             cin >> money;
-                            moneyWithdraw(&chel[index - 1], money);
+                            moneyWithdraw(&chel[index - 1], money, "discharge.txt");
                             system("pause");
                             cin.get();
                             system("cls");
@@ -270,7 +286,7 @@ int main() {
                             index2 = inputCheck(1, chel.size());
                             cout << "Enter amount of money to transfer" << endl;
                             cin >> money;
-                            moneyTransfer(&chel[index - 1], &chel[index2 - 1], money);
+                            moneyTransfer(&chel[index - 1], &chel[index2 - 1], money, "discharge.txt");
                             system("pause");
                             cin.get();
                             system("cls");

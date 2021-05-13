@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <string>
 #include <vector>
 #include <assert.h>
 
@@ -17,11 +18,11 @@ int test_all() {
     assert(test[0].lastName == "User2");
     assert(test[3].lastName == "User3");
     assert(getAllMoney(test) == 18000);
-    moneyTopUp(&test[0], 1000);
+    moneyTopUp(&test[0], 1000, "testdischarge.txt");
     assert(test[0].money == 7000);
-    moneyWithdraw(&test[3], 1000);
+    moneyWithdraw(&test[3], 1000, "testdischarge.txt");
     assert(test[3].money == 2000);
-    moneyTransfer(&test[1], &test[2], 500);
+    moneyTransfer(&test[1], &test[2], 500, "testdischarge.txt");
     assert(test[1].money == 4500);
     assert(test[2].money == 4500);
     synchronization(test, "testNew.txt");
