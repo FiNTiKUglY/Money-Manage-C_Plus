@@ -114,7 +114,7 @@ void moneyTransfer(Human* sender, Human* receiver, int money) {
     printf("|%17d|\n", money);
     printf("___________________\n");
 }
-
+ 
 void moneyWithdraw(Human* acc, int money) {
     (*acc).money -= money;
     printf("___________________\n");
