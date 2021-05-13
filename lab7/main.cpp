@@ -124,8 +124,13 @@ void moneyTransfer(Human* sender, Human* receiver, int money, string fileName) {
     printf("|%17d|\n", money);
     printf("___________________\n");
 }
+<<<<<<< HEAD
 
 void moneyWithdraw(Human* acc, int money, string fileName) {
+=======
+ 
+void moneyWithdraw(Human* acc, int money) {
+>>>>>>> 600e40263eb72071725aa3d8b1d1b2b2d9df48bc
     (*acc).money -= money;
     string text(currentDate);
     text += " money withdraw by " + to_string(money);
