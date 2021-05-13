@@ -185,7 +185,7 @@ int procent(Human acc, string date) {
         newmoney = newmoney * (1 + (procent / 365 * days[n]));
     }
     return newmoney;
-}7
+}
 
 void lookInfoInDate(Human acc, string date) {
     int dayMoney;
