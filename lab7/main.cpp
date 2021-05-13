@@ -24,10 +24,10 @@ void initialization(vector<Human> *list, string fileName) {
     ifstream fin(fileName);
     Human chel;
     while (!fin.eof()) {
-	    fin >> chel.account;
-	    fin >> chel.category;
-	    fin >> chel.name;
-	    fin >> chel.lastName;
+        fin >> chel.account;
+        fin >> chel.category;
+        fin >> chel.name;
+        fin >> chel.lastName;
         fin >> chel.birthDate;
         fin >> chel.city;
         fin >> chel.number;
@@ -49,9 +49,9 @@ void synchronization(vector<Human> list, string fileName) {
     fout.open(fileName, ios::out | ios::trunc);
     for (i = 0; i < list.size() - 1; i++) {
         fout << list[i].account << " ";
-	    fout << list[i].category << " ";
-	    fout << list[i].name << " ";
-	    fout << list[i].lastName << " ";
+        fout << list[i].category << " ";
+        fout << list[i].name << " ";
+        fout << list[i].lastName << " ";
         fout << list[i].birthDate << " ";
         fout << list[i].city << " ";
         fout << list[i].number << " ";
@@ -124,13 +124,8 @@ void moneyTransfer(Human* sender, Human* receiver, int money, string fileName) {
     printf("|%17d|\n", money);
     printf("___________________\n");
 }
-<<<<<<< HEAD
-
-void moneyWithdraw(Human* acc, int money, string fileName) {
-=======
  
-void moneyWithdraw(Human* acc, int money) {
->>>>>>> 600e40263eb72071725aa3d8b1d1b2b2d9df48bc
+void moneyWithdraw(Human* acc, int money, string fileName) {
     (*acc).money -= money;
     string text(currentDate);
     text += " money withdraw by " + to_string(money);
