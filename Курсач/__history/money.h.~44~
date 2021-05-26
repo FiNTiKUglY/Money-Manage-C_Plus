@@ -1,0 +1,29 @@
+//---------------------------------------------------------------------------
+
+#ifndef moneyH
+#define moneyH
+#include <vcl.h>
+#include "Unit1.h"
+#include <vector>
+using namespace std;
+//---------------------------------------------------------------------------
+#endif
+
+class Wallet
+{
+    public:
+	String name;
+    int money;
+};
+
+void initialization(vector<Wallet> *list, String fileName);
+void discharge(Wallet acc, String text, String fileName);
+void synchronization(vector<Wallet> list, String fileName);
+void moneyWithdraw(Wallet* acc, int money, String fileName, String flag);
+void moneyTopUp(Wallet* acc, int money, String fileName, String flag);
+void printMoney(int index, TLabel* Label8, int money);
+int moneyConvert(int index, int money);
+void checkAutoPays(vector<Wallet> *list, String fileName);
+int getIndex(vector<Wallet> list, String name);
+int expensions(vector<TLabel*> labels, String walletName, String fileName);
+float totalMoney(vector<int> amounts);
