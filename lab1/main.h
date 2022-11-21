@@ -1,1 +1,0 @@
-int sumChecker(int sum, int a, int b);
